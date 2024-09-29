@@ -2,18 +2,23 @@ import { RequestHandler } from 'express';
 import Task, { ITask } from '../models/tasks';
 import User from '../models/user';
 
-// Create a new task
+// Gör ny task
 export const createTask: RequestHandler = async (req, res, next) => {
   try {
+
+    // Kolla json body
+    console.log('Request Body:', req.body); 
+    
     const { title, description, status, assignedTo, finishedBy } = req.body;
 
-    // Basic validation
+    // Validering
     if (!title) {
+      
       res.status(400).json({ msg: 'Title is required' });
       return;
     }
 
-    // Check if assignedTo user exists
+    // Kolla om assignedTo user finns
     if (assignedTo && !(await User.findById(assignedTo))) {
       res.status(400).json({ msg: 'Assigned user does not exist' });
       return;

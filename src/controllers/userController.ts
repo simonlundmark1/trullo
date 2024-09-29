@@ -12,11 +12,6 @@ export const createUser: RequestHandler = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
-    // Basic validation
-    if (!name || !email || !password) {
-      res.status(400).json({ msg: 'Please enter all fields' });
-      return;
-    }
 
     // Check for existing user
     const existingUser = await User.findOne({ email });
