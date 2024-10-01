@@ -21,7 +21,7 @@ mongoose
 app.use('/users', userRoutes);
 app.use('/tasks', taskRoutes);
 
-// Error-handling middleware (should be after all routes)
+// Error-handling middleware
 app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
   console.error(err);
   const errorMessage =
